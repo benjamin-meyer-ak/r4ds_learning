@@ -4,7 +4,7 @@ project:
 book:
   title: "r4ds_learning"
   author: "Norah Jones"
-  date: "10/26/2024"
+  date: today
   chapters:
     - index.qmd
     - intro.qmd
