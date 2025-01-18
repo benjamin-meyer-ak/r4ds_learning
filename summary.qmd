@@ -1,7 +1,58 @@
-# Summary
+# TADA
 
-In summary, this book has no content whatsoever.
+Notes from TADA vignette: https://usepa.github.io/EPATADA/articles/TADAModule1.html
 
 ```{r}
-1 + 1
+# install TADA from github if not already present
+
+# library(remotes)
+# remotes::install_github("USEPA/EPATADA",
+#  ref = "develop",
+#  dependencies = TRUE)
+
+# load packages for vignette here
+library(EPATADA)
+library(tidyverse)
+
+
+
+
 ```
+
+
+```{r}
+# TADA_DataRetrieval Vignette
+
+## data download examples
+TADAProfile <- TADA_DataRetrieval(organization = c("REDLAKE_WQX", "SFNOES_WQX", "PUEBLO_POJOAQUE", "FONDULAC_WQX", "PUEBLOOFTESUQUE", "CNENVSER"), startDate = "2018-01-01", endDate = "2019-01-01", applyautoclean = FALSE)
+
+AK_AL_WaterTemp <- TADA_BigDataRetrieval(startDate = "2000-01-01", endDate = "2002-12-31", characteristicName = "Temperature, water", statecode = c("AK","AL")) # this takes ~3 min to download; 52963 x 123 df
+
+# AllWaterTemp <- TADA_BigDataRetrieval(characteristicName = "Temperature, water")
+
+# AllPhosphorus <- TADA_BigDataRetrieval(characteristicName = "Phosphorus")
+
+# AllCT <- TADA_BigDataRetrieval(statecode = "CT")
+
+
+## Filter by media type example
+
+# Filter to retain only results for use in analysis
+TADAProfile <- TADA_AnalysisDataFilter(TADAProfile,
+  clean = TRUE,
+  surface_water = TRUE,
+  ground_water = FALSE,
+  sediment = FALSE
+)
+
+
+## TADA AutoClean
+
+# see prior to clean function
+str(TADAProfile)
+
+
+
+
+```
+
